@@ -98,9 +98,17 @@
         <div class="result-container">
             <h3>Result: <span id="gameResult"></span></h3>
         </div>
+
+        <div class="result-container">
+            <h3>Player Wins: <span id="playerWins">0</span></h3>
+            <h3>Computer Wins: <span id="computerWins">0</span></h3>
+        </div>
     </div>
+    
     <script>
         const options = ["Rock", "Paper", "Scissors"];
+        let playerWins = 0;
+        let computerWins = 0;
 
         function getRandomChoice() {
             return options[Math.floor(Math.random() * 3)];
@@ -119,10 +127,15 @@
                 (playerChoice === "Scissors" && computerChoice === "Paper")
             ) {
                 document.getElementById("gameResult").innerHTML = "You win!";
+                playerWins++;
             }
             else {
                 document.getElementById("gameResult").innerHTML = "You lose!";
+                computerWins++;
             }
+
+            document.getElementById('playerWins').innerHTML = playerWins;
+            document.getElementById('computerWins').innerHTML = computerWins;
         }
     </script>
 </body>
