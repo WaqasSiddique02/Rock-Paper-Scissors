@@ -1,50 +1,130 @@
 <html>
-    <head>
-        <title>
-            Rock Paper Scissors
-        </title>
-    </head>
-    <body>
+
+<head>
+    <title>
+        Rock Paper Scissors
+    </title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            width: 350px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .buttons-container {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #3498db;
+            border: none;
+            padding: 15px 25px;
+            margin: 5px;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2c3e50;
+            transform: scale(1.1);
+        }
+
+        .result-container {
+            color: white;
+            margin-top: 15px;
+        }
+
+        h3 span {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                width: 100%;
+                padding: 20px;
+            }
+
+            button {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
         <h2>Rock Paper Scissors</h2>
-        <div>
+        <div class="buttons-container">
             <button id="Rock" onclick="gameStart('Rock')">Rock</button>
             <button id="Paper" onclick="gameStart('Paper')">Paper</button>
             <button id="Scissors" onclick="gameStart('Scissors')">Scissors</button>
         </div>
 
-        <div class="computerChoice">
-            <h3 id="computerChoice"></h3>
+        <div class="result-container">
+            <h3>Computer Chose: <span id="computerChoice"></span></h3>
         </div>
 
-        <div>
-            <h3 id="gameResult"></h3>
+        <div class="result-container">
+            <h3>Result: <span id="gameResult"></span></h3>
         </div>
+    </div>
+    <script>
+        const options = ["Rock", "Paper", "Scissors"];
 
-        <script>
-            const options = ["Rock", "Paper", "Scissors"]; 
+        function getRandomChoice() {
+            return options[Math.floor(Math.random() * 3)];
+        }
 
-            function getRandomChoice() {
-                return options[Math.floor(Math.random() * 3)]; 
+        function gameStart(playerChoice) {
+            const computerChoice = getRandomChoice();
+            document.getElementById('computerChoice').innerHTML = computerChoice;
+
+            if (playerChoice === computerChoice) {
+                document.getElementById("gameResult").innerHTML = "It's a draw!";
             }
-            
-            function gameStart(playerChoice) {
-                const computerChoice = getRandomChoice();
-                document.getElementById('computerChoice').innerHTML = "Computer chose: " + computerChoice; 
-
-                if (playerChoice === computerChoice) {
-                    document.getElementById("gameResult").innerHTML = "It's a draw!";
-                } 
-                else if (
-                    (playerChoice === "Rock" && computerChoice === "Scissors") ||
-                    (playerChoice === "Paper" && computerChoice === "Rock") ||
-                    (playerChoice === "Scissors" && computerChoice === "Paper")
-                ) {
-                    document.getElementById("gameResult").innerHTML = "You win!";
-                } 
-                else {
-                    document.getElementById("gameResult").innerHTML = "You lose!";
-                }
+            else if (
+                (playerChoice === "Rock" && computerChoice === "Scissors") ||
+                (playerChoice === "Paper" && computerChoice === "Rock") ||
+                (playerChoice === "Scissors" && computerChoice === "Paper")
+            ) {
+                document.getElementById("gameResult").innerHTML = "You win!";
             }
-        </script>
-    </body>
+            else {
+                document.getElementById("gameResult").innerHTML = "You lose!";
+            }
+        }
+    </script>
+</body>
+
 </html>
